@@ -21,7 +21,7 @@ if (buttonsStatus.length > 0) {
 // Form search
 const formSearch = document.querySelector("#form-search");
 if (formSearch) {
-    const url = new URL(window.location.href);
+    let url = new URL(window.location.href);
   formSearch.addEventListener("submit", (e) => {
     e.preventDefault();
     const keyword = e.target.elements.keyword.value;
@@ -34,3 +34,21 @@ if (formSearch) {
   });
 }
 // End Form search
+// pagination
+const buttonsPagination = document.querySelectorAll("[button-pagination]");
+if(buttonsPagination){
+  let url = new URL(window.location.href);
+  buttonsPagination.forEach((button) => {
+    button.addEventListener("click", () => {
+      const page = button.getAttribute("button-pagination");
+      console.log(page);
+      if (page) {
+        url.searchParams.set("page", page);
+      } else {
+        url.searchParams.delete("page");
+      }
+      window.location.href = url.href;
+    });
+  });
+}
+// End pagination
