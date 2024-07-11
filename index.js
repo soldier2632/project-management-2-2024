@@ -1,4 +1,5 @@
 const express = require("express");
+var methodOverride = require("method-override");
 const database = require("./config/database");
 require("dotenv").config();
 database.connect();
@@ -12,8 +13,9 @@ app.locals.prefixAdmin = systemConfig.prefixAdmin;
 app.set("views", "./views");
 app.set("view engine", "pug");
 app.use(express.static("public"));
+app.use(methodOverride("PATCH"));
 route(app);
-routeAdmin(app); 
+routeAdmin(app);
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-  });
+  console.log(`Example app listening on port ${port}`);
+});
