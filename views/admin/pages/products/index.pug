@@ -17,10 +17,32 @@ block main
 
   .card.mb-3  
     .card-header danh sách
-    .card-body       
-      table.table.table-hover.table-sm
+    .card-body 
+      form(
+        action=`${prefixAdmin}/products/change-multi?_method=PATCH`
+        method="POST"
+        form-change-multi
+      )
+        .d-flex.align-item-start
+          .form-group
+            select(name="type" class="form-control")
+             option(value="active") Hoạt động  
+             option(value="inactive") Dừng hoạt động
+          .form-group 
+            input(
+              type="text"
+              name="ids"
+              class="form-control d-none"
+            )
+          button(type="submit" class="btn btn-primary") Áp dụng   
+      table( 
+        class="table table-hover table-sm"
+        checkbox-multi
+      )
         thead
           tr
+            th
+              input(type="checkbox" name="checkall")
             th STT
             th Hình ảnh
             th Tiêu đề
@@ -30,6 +52,12 @@ block main
         tbody
           each item, index in products
             tr
+              td
+                input(
+                  type="checkbox"
+                  name="id"
+                  value=item.id
+                )
               td #{index + 1}
               td
                 img(
