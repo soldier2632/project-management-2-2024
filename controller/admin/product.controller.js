@@ -55,6 +55,9 @@ console.log(ids);
     case "inactive":
       await Product.updateMany({_id:{$in: ids}}, {status: "inactive"});
       break;
+    case "delete-all":
+    await Product.updateMany({_id:{$in: ids}}, {deleted:true, deleteAt: new Date()});
+    break;
     default:
       break;  
    }
