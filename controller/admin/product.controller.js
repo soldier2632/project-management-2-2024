@@ -64,7 +64,13 @@ console.log(ids);
 //[DELETE] /admin/product/delete/:id
 module.exports.deleteItem= async (req,res)=>{
   const id = req.params.id;
-  console.log(id);
-    await Product.deleteOne({_id:id});
+
+    // await Product.deleteOne({_id:id});
+    await Product.updateOne(
+      {_id:id},
+      {deleted:true,
+       deletedAt: new Date()
+      }
+      );
     res.redirect("back");   
 }
