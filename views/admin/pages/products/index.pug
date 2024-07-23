@@ -32,6 +32,7 @@ block main
             th Hình ảnh
             th Tiêu đề
             th Giá
+            th vị trí
             th Trạng thái
             th Hành động
         tbody
@@ -48,11 +49,19 @@ block main
                 img(
                   src= item.thumbnail
                   alt= item.title
-                  width="200px"
+                  width="150px"
                   height="auto"
                 )
               td #{item.title}
               td #{item.price}
+              td
+                input(
+                  type = "number"
+                  value=item.position
+                  style="width:60px"
+                  min="1"
+                  name="position"
+                )
               td
                 if(item.status == "active")
                   button(
@@ -76,6 +85,7 @@ block main
                   data-id=item.id
                   button-delete
                   ) Xóa
+               
 
   +pagination(pagination)
 
@@ -92,5 +102,6 @@ block main
     id="form-delete-item"
     data-path=`${prefixAdmin}/products/delete`
   ) 
+
   script(src="/admin/js/product.js")
       

@@ -37,3 +37,23 @@ if(buttonDelete.length > 0){
 })
 }
 // End Delete Item
+// update Item
+const buttonUpdate = document.querySelectorAll("[button-update]");
+if(buttonUpdate.length > 0){
+      const formDeleteItem = document.querySelector("#form-update-item");
+      const path = formDeleteItem.getAttribute("data-path");
+
+      buttonUpdate.forEach(button =>{
+      button.addEventListener("click",()=>{
+       
+       const isConfirm = confirm("ban co muon thay doi khong khong?");
+       if(isConfirm){
+        const id = button.getAttribute("data-id");
+        console.log(id);
+       const action = `${path}/${id}?_method=UPDATE`;
+       formDeleteItem.action = action;
+       formDeleteItem.submit();}
+   })
+
+})
+}
