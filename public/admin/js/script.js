@@ -161,4 +161,4 @@ closeImage.addEventListener("click", () => {
   uploadImagePreview.src = "";
   uploadImageInput.value = "";
 });
-//End upload image
+//End close image

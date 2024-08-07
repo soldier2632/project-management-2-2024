@@ -25,7 +25,9 @@ app.set("view engine", "pug");
 
 app.use(express.static("public"));
 
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("PATCH"));
+app.use(methodOverride("DELETE"));
 // parse application/x-www-form-urlencoded 
 app.use(bodyParser.urlencoded({ extended: false }));
 //flash

@@ -49,7 +49,7 @@ if(buttonUpdate.length > 0){
        const isConfirm = confirm("ban co muon thay doi khong khong?");
        if(isConfirm){
         const id = button.getAttribute("data-id");
-        console.log(id);
+        // console.log(id);
        const action = `${path}/${id}?_method=UPDATE`;
        formDeleteItem.action = action;
        formDeleteItem.submit();}
@@ -57,3 +57,4 @@ if(buttonUpdate.length > 0){
 
 })
 }
+

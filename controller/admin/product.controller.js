@@ -125,3 +125,37 @@ module.exports.createPost = async (req, res) => {
   await product.save();
   res.redirect(`${systemConfig.prefixAdmin}/products`);
 };
+//[GET] /admin/products/edit/:id
+module.exports.edit = async (req, res) => {
+  try {
+    const find = {
+      _id: req.params.id,
+      deleted: false,
+    };
+    const product = await Product.findOne(find);
+    console.log(product);
+    res.render("admin/pages/products/edit.pug", {
+      pagetitle: "Chỉnh sửa sản phẩm",
+      products: product,
+    });
+  } catch (error) {
+    res.redirect(`${systemConfig.prefixAdmin}/products`);
+  }
+};
+//[PATCH] /admin/products/edit/:id
+module.exports.editPatch = async (req, res) => {
+  const id = req.params.id;
+  req.body.price = parseInt(req.body.price);
+  req.body.discountPercentage = parseInt(req.body.discountPercentage);
+  req.body.stock = parseInt(req.body.stock);
+  if (req.file) {
+    req.body.thumbnail = `/uploads/${req.file.filename}`;
+  }
+  try {
+    await Product.updateOne({ _id: id }, req.body);
+    req.flash("success", `Cập nhật thành công!`);
+  } catch (error) {
+    req.flash("error", `Cập nhật thất bại!`);
+  }
+  res.redirect("back");
+};

@@ -5,15 +5,19 @@ const storageMulter = require("../../helpers/storageMulter.js");
 const validate = require("../../validates/admin/product.validate.js");
 const upload = multer({ storage: storageMulter()});
 const routes = express.Router();
-//route.get
+//routes.get
 routes.get("/", productController.index);
-//route.patch
+//routes.patch
 routes.post("/change-status/:status/:id", productController.changeStatus);
 routes.post("/change-multi", productController.changeMulti);
-//route.delete
+//routes.delete
 routes.post("/delete/:id", productController.deleteItem);
-//route.get
+//routes.get
 routes.get("/create", productController.createItem);
-//route.post
+//routes.post
 routes.post("/create", upload.single("thumbnail"),validate.createPost, productController.createPost);
+//routes.get
+routes.get("/edit/:id", productController.edit);
+//routes.patch
+routes.post("/edit/:id", upload.single("thumbnail"),validate.createPost, productController.editPatch);
 module.exports = routes;
