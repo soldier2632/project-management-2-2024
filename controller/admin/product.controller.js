@@ -159,3 +159,20 @@ module.exports.editPatch = async (req, res) => {
   }
   res.redirect("back");
 };
+module.exports.detail = async (req, res)=>{
+  try {
+    const find = {
+      _id: req.params.id,
+      deleted: false,
+    };
+    const product = await Product.findOne(find);
+    console.log(product);
+    res.render("admin/pages/products/detail.pug", {
+      pagetitle: "Chi tiết sản phẩm",
+      product: product,
+    });
+  } catch (error) {
+    res.redirect(`${systemConfig.prefixAdmin}/products`);
+  }
+};
+
