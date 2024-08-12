@@ -20,10 +20,10 @@ const port = process.env.PORT;
 //App locals Variables
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
-app.set("views", "./views");
+app.set("views", `${__dirname}/view`);
 app.set("view engine", "pug");
 
-app.use(express.static("public"));
+app.use(express.static(`${__dirname}/public`));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("PATCH"));
