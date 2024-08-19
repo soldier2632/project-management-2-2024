@@ -30,6 +30,7 @@ routes.get("/edit/:id", productController.edit);
 routes.post(
   "/edit/:id",
   upload.single("thumbnail"),
+  uploadMiddeware.upload,
   validate.createPost,
   productController.editPatch
 );

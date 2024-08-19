@@ -153,12 +153,49 @@ if (uploadImage) {
 }
 //End preview image
 // close image
-const uploadImageInput = document.querySelector("[upload-image-input]");
-const uploadImagePreview = document.querySelector("[upload-image-preview]");
-const closeImage =  document.querySelector("[close-image]");
-console.log(closeImage);
-closeImage.addEventListener("click", () => {
-  uploadImagePreview.src = "";
-  uploadImageInput.value = "";
-});
+// const uploadImageInput = document.querySelector("[upload-image-input]");
+// const uploadImagePreview = document.querySelector("[upload-image-preview]");
+// const closeImage =  document.querySelector("[close-image]");
+// console.log(closeImage);
+// closeImage.addEventListener("click", () => {
+//   uploadImagePreview.src = "";
+//   uploadImageInput.value = "";
+// });
 //End close image
+//sort
+const sort = document.querySelector("[sort]");
+if (sort) {
+  let url = new URL(window.location.href);
+  const sortSelect = sort.querySelector("[sort-select]");
+  const sortClear = document.querySelector("[sort-clear]");
+  //sap xep
+  sortSelect.addEventListener("change", (e) => {
+    const [key, value] = e.target.value.split("-");
+    console.log(key, value);
+
+    url.searchParams.set("sortKey", key);
+    url.searchParams.set("sortValue", value);
+    window.location.href = url.href;
+  });
+  //End sap xep
+  //clear
+
+  sortClear.addEventListener("click", () => {
+    url.searchParams.delete("sortKey");
+    url.searchParams.delete("sortValue");
+    window.location.href = url.href;
+  });
+  //End clear
+  // them selected cho option
+  const sortKey = url.searchParams.get("sortKey");
+  const sortValue = url.searchParams.get("sortValue");
+  console.log(sortKey, sortValue);
+  if (sortKey && sortValue) {
+    const stringSort = `${sortKey}-${sortValue}`;
+    const optionSort = sortSelect.querySelector(`option[value="${stringSort}"]`);
+    // const optionSort = sortSelect.querySelector(`option[value="${sortKey}-${sortValue}"]`);
+    optionSort.selected = true;
+  }
+}
+//End sort
+

@@ -27,10 +27,18 @@ module.exports.index = async (req, res) => {
     countProducts
   );
   //end pagination
+  //sort
+  let sort = {};
+  if (req.query.sortKey && req.query.sortValue) {
+    sort[req.query.sortKey] = req.query.sortValue;
+  } else {
+    sort.position = "desc";
+  }
+  //End sort
   const products = await Product.find(find)
     .limit(objectPagination.limitItems)
     .skip(objectPagination.skip)
-    .sort({ position: "desc" });
+    .sort(sort);
 
   res.render("admin/pages/products/index.pug", {
     pagetitle: "trang san pham",
@@ -157,7 +165,7 @@ module.exports.editPatch = async (req, res) => {
   }
   res.redirect("back");
 };
-module.exports.detail = async (req, res)=>{
+module.exports.detail = async (req, res) => {
   try {
     const find = {
       _id: req.params.id,
@@ -173,4 +181,3 @@ module.exports.detail = async (req, res)=>{
     res.redirect(`${systemConfig.prefixAdmin}/products`);
   }
 };
-
