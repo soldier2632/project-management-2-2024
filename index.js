@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require('path');
 var methodOverride = require("method-override");
 const database = require("./config/database");
 const bodyParser = require("body-parser");
@@ -23,6 +24,9 @@ app.locals.prefixAdmin = systemConfig.prefixAdmin;
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
 
+// tinyMCE
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+//end TinyMCE
 app.use(express.static(`${__dirname}/public`));
 console.log(__dirname);
 app.use(express.urlencoded({ extended: true }));

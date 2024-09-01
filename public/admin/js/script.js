@@ -153,14 +153,14 @@ if (uploadImage) {
 }
 //End preview image
 // close image
-// const uploadImageInput = document.querySelector("[upload-image-input]");
-// const uploadImagePreview = document.querySelector("[upload-image-preview]");
-// const closeImage =  document.querySelector("[close-image]");
-// console.log(closeImage);
-// closeImage.addEventListener("click", () => {
-//   uploadImagePreview.src = "";
-//   uploadImageInput.value = "";
-// });
+const uploadImageInput = document.querySelector("[upload-image-input]");
+const uploadImagePreview = document.querySelector("[upload-image-preview]");
+const closeImage =  document.querySelector("[close-image]");
+console.log(closeImage);
+closeImage.addEventListener("click", () => {
+  uploadImagePreview.src = "";
+  uploadImageInput.value = "";
+});
 //End close image
 //sort
 const sort = document.querySelector("[sort]");
